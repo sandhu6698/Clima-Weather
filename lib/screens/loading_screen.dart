@@ -24,14 +24,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String url= "http://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=875951dcb159b3f1f05d6d70ef286ea5";
     NetworkHelper networkHelper = NetworkHelper(url);
     var weatherdata= await networkHelper.getData();
-
-    var temperature=jsonDecode(weatherdata.body)['main']['temp'] - 273.15;
-    var name  = jsonDecode(weatherdata.body)['name'];
-    var weather= jsonDecode(weatherdata.body)['weather'][0]['main'];
-    print("temp : $temperature \n City: $name \n weather: $weather " );
-
     Navigator.push(context, MaterialPageRoute(builder: (context){
-      return LocationScreen(weatherdata);
+      return LocationScreen(weatherdata.body);
     }));
   }
 
